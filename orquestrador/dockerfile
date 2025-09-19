@@ -1,0 +1,9 @@
+FROM python:3.11-slim
+WORKDIR /orquestrador
+
+COPY main.py .
+
+RUN pip install fastapi uvicorn httpx
+EXPOSE 8000
+
+CMD ["uvicorn", "main:app"]
