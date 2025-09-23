@@ -1,0 +1,28 @@
+
+services:
+  app:
+    build: .
+    container_name: zippy_app
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_llava
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  ollama_data: {}
