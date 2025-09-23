@@ -73,7 +73,7 @@ packaging==25.0
     # via
     #   huggingface-hub
     #   transformers
-pillow==11.3.0
+pillow
     # via
     #   -r requirements.in
     #   torchvision

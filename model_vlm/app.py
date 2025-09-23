@@ -1,28 +1,37 @@
 from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import JSONResponse
+from scripts import read_text_from_txt
 from tempfile import NamedTemporaryFile
-from moondream_call import caption_img
+from moondream_call import query_img
 from ollama_call import llava_call
-
+import os
 
 app = FastAPI()
 
+prompt_path = "sys_prompts/moondream_prompt.txt"
 
 @app.post("/caption")
 async def caption_endpoint(
     file: UploadFile = File(...),
     model: str = Form("moondream"),
-    question: str = Form("What is the main subject of this image?"),
+    question: str = Form(None),
 ):
-    with NamedTemporaryFile(delete=False, suffix=".png") as temp:
+    
+    if question is None:
+        question = read_text_from_txt(prompt_path)
+    
+    with NamedTemporaryFile(delete=False) as temp:
         temp.write(await file.read())
         temp_path = temp.name
 
-    if model == "moondream":
-        answer = caption_img(temp_path)
+    answer = ""
 
-    if model == "ollama_llava":
-        prompt = f"Describe the image in detail."
-        answer = llava_call(temp_path, prompt)
+    if model == "moondream":
+        answer = query_img(temp_path, question)
+
+    elif model == "ollama_llava":
+        answer = llava_call(temp_path, question)
+
+    os.remove(temp_path)
 
     return JSONResponse({"caption": answer})
