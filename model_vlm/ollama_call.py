@@ -9,7 +9,7 @@ def llava_call(image_path: str, prompt: str):
 
         response = ollama.chat(
             model="llava-7b",
-            messages=[{"role": "user", "content": prompt, "image": base64_image}],
+            messages=[{"role": "user", "content": prompt, "images": [base64_image]}],
         )
 
         return response["message"]["content"]

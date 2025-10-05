@@ -7,3 +7,4 @@ pillow
 python-multipart
 torch
 torchvision
+accelerate
