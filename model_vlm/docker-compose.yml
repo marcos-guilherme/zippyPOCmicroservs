@@ -14,7 +14,7 @@ services:
     image: ollama/ollama:latest
     container_name: ollama_llava
     ports:
-      - "11434:11434"
+      - "11445:11445"
     volumes:
       - ollama_data:/root/.ollama
     deploy:
