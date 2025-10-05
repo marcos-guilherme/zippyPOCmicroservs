@@ -9,21 +9,18 @@ services:
       - OLLAMA_HOST=http://ollama:11434
     depends_on:
       - ollama
+    gpus: all
 
   ollama:
     image: ollama/ollama:latest
     container_name: ollama_llava
     ports:
-      - "11445"
+      - "11445:11434"
     volumes:
       - ollama_data:/root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+
+    gpus: all
+
 
 volumes:
   ollama_data: {}
