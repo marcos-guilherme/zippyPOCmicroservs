@@ -25,7 +25,7 @@ services:
     image: ngrok/ngrok:latest
     environment:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
-    command: http app:8000
+    command: http --pooling-enabled app:8000
     ports:
       - "4040:4040"
 
