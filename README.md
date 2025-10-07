@@ -122,8 +122,6 @@ curl -X POST "http://localhost:8005/caption" \
 
 ***
 
-Qualquer dúvida sobre uso ou integração, consulte `/models` para nomes exatos ou revise exemplos acima.[2][3][1]
+Qualquer dúvida sobre uso ou integração, consulte `/models` para nomes exatos ou revise exemplos acima.
 
-[1](https://notagateway.com.br/blog/como-documentar-api-passo-a-passo-para-otimizar-integracoes/)
-[2](https://document360.com/pt-br/blog/documentacao-de-api/)
-[3](https://twlivre.org/tutoriais/api-docs/introducao-apis/)
+
